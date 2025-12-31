@@ -262,6 +262,10 @@ export class AudioEngine {
     }
   }
 
+  public toggle8D(active: boolean, speed?: number) {
+    this.set8DActive(active);
+  }
+
   public setLofiActive(active: boolean, crackleVol: number = 0.2) {
     if (!this.ctx || !this.lofiFilter) return;
     this.crackleIntensity = crackleVol;
@@ -272,6 +276,10 @@ export class AudioEngine {
       this.lofiFilter.frequency.setTargetAtTime(20000, this.ctx.currentTime, 0.5);
       this.stopVinyl();
     }
+  }
+
+  public setLoFi(active: boolean) {
+    this.setLofiActive(active);
   }
 
   public setLofiCrackleVolume(vol: number) {
@@ -314,7 +322,7 @@ export class AudioEngine {
     }
   }
 
-  public startNoise(type: NoiseType, vol: number) {
+  public startNoise(type: NoiseType, vol: number = 0.5) {
     this.stopNoise();
     const ctx = this.getContext();
     const buffer = this.buffers[type];
